@@ -19,4 +19,5 @@ Nunca publique no domínio definitivo sem aprovação e pagamento confirmados pe
 - Para alterar um site existente, leia antes o `sites/<slug>/briefing.md` e mantenha
   a identidade visual registrada ali.
 - `briefing.md` é interno: não vai para a prévia nem para produção.
-- Responda sempre em português do Brasil.
+- Todos os sites são para negócios nos EUA: conteúdo do site em inglês americano (en-US).
+- Converse com o usuário e escreva os `briefing.md` em português do Brasil.

@@ -28,7 +28,7 @@ Se o status for outro, pare e pergunte.
    `site-<slug>`, Source **Deploy from a branch**, branch `main` / `(root)`,
    **Custom domain** = domínio, e marcar **Enforce HTTPS** quando liberar.
 6. **Passe as instruções de DNS** para o usuário configurar no registro do
-   domínio (Registro.br, GoDaddy, Hostinger...):
+   domínio (GoDaddy, Namecheap, Squarespace Domains, Cloudflare...):
    - Registros `A` em `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - Registro `CNAME` em `www`: `<dono>.github.io`
    - A propagação leva de minutos a 24h; o HTTPS é emitido automaticamente depois.

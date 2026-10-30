@@ -1,14 +1,15 @@
 # Fábrica de Sites 🤖
 
 Um agente de IA para o Claude Code que cria sites completos a partir de um briefing.
+Todos os sites são para negócios americanos: conteúdo em inglês (en-US) e padrões dos EUA.
 
 ## Como usar
 
 Abra este repositório no Claude Code (terminal, app ou claude.ai/code) e digite:
 
 ```
-/criar-site Padaria do Zé, padaria artesanal em Campinas. Objetivo: receber
-encomendas pelo WhatsApp (19) 99999-0000. Cores: marrom e creme.
+/criar-site Joe's Bakery, padaria artesanal em Austin, TX. Objetivo: receber
+encomendas por telefone (512) 555-0100. Cores: marrom e creme.
 ```
 
 Ou simplesmente: *"Crie um site para meu estúdio de pilates"*.

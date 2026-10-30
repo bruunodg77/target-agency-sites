@@ -7,7 +7,7 @@ description: Cria um novo site completo a partir de um briefing. Use quando o us
 
 1. Leia o pedido do usuário (argumentos deste comando). Se ele estiver vazio,
    pergunte em uma única mensagem: nome do negócio, o que faz, objetivo do site,
-   contatos (WhatsApp, e-mail, Instagram) e cores preferidas.
+   cidade/estado nos EUA, contatos (telefone, e-mail, Instagram) e cores preferidas.
 2. Defina o slug (ex.: `clinica-sorriso`) e crie `sites/<slug>/briefing.md`
    com tudo o que o usuário informou.
 3. Delegue a construção ao agente `criador-de-sites` (ferramenta Agent,

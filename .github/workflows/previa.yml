@@ -41,9 +41,9 @@ jobs:
           find _site -name '*.html' -exec sed -i 's#<head>#<head>\n<meta name="robots" content="noindex, nofollow">#' {} +
           # Página inicial com a lista de prévias
           {
-            echo '<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="robots" content="noindex">'
-            echo '<meta name="viewport" content="width=device-width,initial-scale=1"><title>Prévias</title>'
-            echo '<body style="font-family:system-ui;max-width:640px;margin:40px auto;padding:0 16px"><h1>Prévias</h1><ul>'
+            echo '<!doctype html><html lang="en-US"><meta charset="utf-8"><meta name="robots" content="noindex">'
+            echo '<meta name="viewport" content="width=device-width,initial-scale=1"><title>Previews</title>'
+            echo '<body style="font-family:system-ui;max-width:640px;margin:40px auto;padding:0 16px"><h1>Previews</h1><ul>'
             shopt -s nullglob
             for d in _site/*/; do s=$(basename "$d"); echo "<li><a href=\"$s/\">$s</a></li>"; done
             echo '</ul></body></html>'
