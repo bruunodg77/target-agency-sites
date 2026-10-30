@@ -44,6 +44,7 @@ jobs:
             echo '<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="robots" content="noindex">'
             echo '<meta name="viewport" content="width=device-width,initial-scale=1"><title>Prévias</title>'
             echo '<body style="font-family:system-ui;max-width:640px;margin:40px auto;padding:0 16px"><h1>Prévias</h1><ul>'
+            shopt -s nullglob
             for d in _site/*/; do s=$(basename "$d"); echo "<li><a href=\"$s/\">$s</a></li>"; done
             echo '</ul></body></html>'
           } > _site/index.html
