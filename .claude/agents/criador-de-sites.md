@@ -89,11 +89,13 @@ Todo site entregue precisa de um link provisório para o cliente ver e aprovar.
    (`git add sites/<slug> && git commit -m "Prévia: <slug>" && git push -u origin main`).
    O workflow `.github/workflows/previa.yml` publica a prévia no GitHub Pages
    (com noindex, sem os arquivos `.md`).
-3. Acompanhe o deploy até terminar:
-   `gh run list --workflow=previa.yml --limit 1` e `gh run watch <id> --exit-status`.
-4. O link é `https://<dono>.github.io/<repositorio>/<slug>/`
-   (descubra dono e repositório com `gh repo view --json owner,name`).
-   Abra o link com Playwright e confirme que carrega antes de entregar.
+3. O link é `https://<dono>.github.io/<repositorio>/<slug>/`
+   (dono e repositório vêm de `git remote get-url origin`).
+4. Aguarde o deploy (1–3 min) consultando o link até ele responder com a versão nova:
+   `curl -s -o /dev/null -w '%{http_code}' <link>` a cada 20s, por até 5 min.
+   Depois abra o link com Playwright e confirme que carrega.
+   Se não ficar no ar, peça ao usuário para conferir a aba **Actions** do
+   repositório (a API de Actions pode não estar acessível nesta sessão).
 
 Nunca publique no domínio definitivo nesta etapa: isso só acontece com
 `/publicar-site`, depois da aprovação e do pagamento.

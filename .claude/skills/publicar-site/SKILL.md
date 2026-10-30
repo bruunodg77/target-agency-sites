@@ -16,20 +16,17 @@ Se o status for outro, pare e pergunte.
    - Confirme que não sobrou nenhum marcador `[...]` (`grep -rn '\[SEU\|\[SUA' sites/<slug>`).
      Se sobrou, pare e peça os dados ao usuário.
    - Garanta que `robots.txt` permite indexação e aponta para o sitemap.
-3. **Crie o repositório de produção** `site-<slug>` (o GitHub Pages permite
-   um domínio por repositório):
-   ```bash
-   gh repo create <dono>/site-<slug> --public
-   ```
-   Se não houver permissão para criar repositórios, peça ao usuário para criar
-   o repositório vazio e conectá-lo a esta sessão.
+3. **Repositório de produção** `site-<slug>` (o GitHub Pages permite um domínio
+   por repositório). A sessão pode não ter permissão para criar repositórios:
+   peça ao usuário para criar `site-<slug>` vazio e público em github.com/new,
+   e conecte-o com a ferramenta `add_repo`.
 4. **Envie os arquivos** do site (sem `briefing.md` e `_preview/`) para a branch
    `main` desse repositório, com um arquivo `CNAME` contendo o domínio.
-5. **Ative o GitHub Pages** com domínio próprio e HTTPS:
-   ```bash
-   gh api -X POST repos/<dono>/site-<slug>/pages -f "source[branch]=main" -f "source[path]=/"
-   gh api -X PUT repos/<dono>/site-<slug>/pages -f cname=<dominio> -F https_enforced=true
-   ```
+5. **Ative o GitHub Pages**: tente
+   `gh api -X POST repos/<dono>/site-<slug>/pages -f "source[branch]=main" -f "source[path]=/"`.
+   Se a API não estiver acessível, peça ao usuário: em **Settings → Pages** do
+   `site-<slug>`, Source **Deploy from a branch**, branch `main` / `(root)`,
+   **Custom domain** = domínio, e marcar **Enforce HTTPS** quando liberar.
 6. **Passe as instruções de DNS** para o usuário configurar no registro do
    domínio (Registro.br, GoDaddy, Hostinger...):
    - Registros `A` em `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
