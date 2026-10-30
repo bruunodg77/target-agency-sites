@@ -2,8 +2,21 @@
 
 Este repositório guarda todos os sites do usuário, um por pasta em `sites/<slug>/`.
 
-- Para criar um site novo, use o comando `/criar-site` ou o agente `criador-de-sites`.
+## Fluxo de cada site
+
+1. `/criar-site` → o agente `criador-de-sites` constrói o site e **sempre** entrega
+   um link de prévia: `https://<dono>.github.io/<repositorio>/<slug>/`
+   (publicado pelo workflow `.github/workflows/previa.yml` a cada push na `main`).
+2. Cliente pede ajustes → altere, faça commit e push; o mesmo link é atualizado.
+3. Cliente aprova → `Status: aprovado` no `briefing.md`.
+4. Pagamento confirmado → `/publicar-site <slug> <dominio>` publica no domínio
+   definitivo (repositório próprio `site-<slug>` com GitHub Pages + CNAME).
+
+Nunca publique no domínio definitivo sem aprovação e pagamento confirmados pelo usuário.
+
+## Regras
+
 - Para alterar um site existente, leia antes o `sites/<slug>/briefing.md` e mantenha
   a identidade visual registrada ali.
+- `briefing.md` é interno: não vai para a prévia nem para produção.
 - Responda sempre em português do Brasil.
-- `_preview/` contém só screenshots de teste e não deve ser publicado.

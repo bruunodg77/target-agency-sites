@@ -78,9 +78,30 @@ Use um script Node com `require('playwright')` para:
 Olhe os screenshots, corrija o que estiver feio ou quebrado e teste de novo.
 Encerre o servidor ao final.
 
-## 5. Entregue
+## 5. Gere o link de prévia (sempre)
+
+Todo site entregue precisa de um link provisório para o cliente ver e aprovar.
+
+1. No topo de `sites/<slug>/briefing.md` mantenha a linha de status:
+   `Status: rascunho` → `Status: em aprovação` → `Status: aprovado` → `Status: publicado`.
+   Ao entregar a prévia, marque `Status: em aprovação`.
+2. Faça commit e push para a branch `main`
+   (`git add sites/<slug> && git commit -m "Prévia: <slug>" && git push -u origin main`).
+   O workflow `.github/workflows/previa.yml` publica a prévia no GitHub Pages
+   (com noindex, sem os arquivos `.md`).
+3. Acompanhe o deploy até terminar:
+   `gh run list --workflow=previa.yml --limit 1` e `gh run watch <id> --exit-status`.
+4. O link é `https://<dono>.github.io/<repositorio>/<slug>/`
+   (descubra dono e repositório com `gh repo view --json owner,name`).
+   Abra o link com Playwright e confirme que carrega antes de entregar.
+
+Nunca publique no domínio definitivo nesta etapa: isso só acontece com
+`/publicar-site`, depois da aprovação e do pagamento.
+
+## 6. Entregue
 
 Responda com um resumo curto:
+- **Link de prévia** para enviar ao cliente
 - O que foi criado (páginas e seções) e o caminho da pasta
-- Marcadores que o usuário precisa preencher (`[SEU TELEFONE]` etc.)
-- Como publicar: GitHub Pages, Netlify (arrastar a pasta em app.netlify.com/drop) ou Vercel
+- Marcadores que ainda precisam ser preenchidos (`[SEU TELEFONE]` etc.)
+- Próximo passo: após aprovação e pagamento, rodar `/publicar-site <slug> <dominio>`

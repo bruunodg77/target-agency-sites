@@ -1,0 +1,56 @@
+# Publica todos os sites de sites/ como PRÉVIA no GitHub Pages:
+#   https://<usuario>.github.io/<repositorio>/<slug>/
+# As prévias saem com noindex (o Google não indexa) e sem os arquivos internos (.md).
+name: Prévia dos sites
+
+on:
+  push:
+    branches: [main]
+    paths: ["sites/**", ".github/workflows/previa.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Montar prévias
+        run: |
+          mkdir -p _site
+          cp -r sites/. _site/
+          # Remove arquivos internos (briefing, anotações) e screenshots de teste
+          find _site -name '*.md' -delete
+          find _site -type d -name '_preview' -prune -exec rm -rf {} +
+          rm -f _site/.gitkeep
+          # Bloqueia indexação das prévias
+          find _site -name 'robots.txt' -delete
+          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          find _site -name '*.html' -exec sed -i 's#<head>#<head>\n<meta name="robots" content="noindex, nofollow">#' {} +
+          # Página inicial com a lista de prévias
+          {
+            echo '<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="robots" content="noindex">'
+            echo '<meta name="viewport" content="width=device-width,initial-scale=1"><title>Prévias</title>'
+            echo '<body style="font-family:system-ui;max-width:640px;margin:40px auto;padding:0 16px"><h1>Prévias</h1><ul>'
+            for d in _site/*/; do s=$(basename "$d"); echo "<li><a href=\"$s/\">$s</a></li>"; done
+            echo '</ul></body></html>'
+          } > _site/index.html
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
